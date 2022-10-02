@@ -1,8 +1,14 @@
 package com.udacity.asteroidradar
 
+
+import android.graphics.BitmapFactory
+import android.util.Base64
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import com.udacity.asteroidradar.data.room.PictureOfDay
 
 @BindingAdapter("statusIcon")
 fun bindAsteroidStatusImage(imageView: ImageView, isHazardous: Boolean) {
@@ -39,3 +45,15 @@ fun bindTextViewToDisplayVelocity(textView: TextView, number: Double) {
     val context = textView.context
     textView.text = String.format(context.getString(R.string.km_s_unit_format), number)
 }
+
+@BindingAdapter("image","lifecycle")
+fun bindStringToImageView(imageView: ImageView, image: LiveData<List<PictureOfDay>>,lifecycleOwner: LifecycleOwner){
+    image.observe(lifecycleOwner
+    ) { image ->
+        if (image.size>0){
+        val imageByte = Base64.decode(image[0].image, Base64.DEFAULT)
+        imageView.setImageBitmap(BitmapFactory.decodeByteArray(imageByte, 0, imageByte.size))
+    }}
+
+}
+
