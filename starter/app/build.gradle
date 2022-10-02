@@ -7,7 +7,6 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 33
-    buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "com.udacity.asteroidradar"
         minSdkVersion 26
@@ -32,6 +31,7 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+    namespace 'com.udacity.asteroidradar'
 }
 
 dependencies {
@@ -48,12 +48,12 @@ dependencies {
     implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0"
     implementation "android.arch.navigation:navigation-ui-ktx:1.0.0"
 
-    implementation "com.squareup.moshi:moshi:1.8.0"
-    implementation "com.squareup.moshi:moshi-kotlin:1.8.0"
+    implementation 'com.squareup.moshi:moshi:1.14.0'
+    implementation 'com.squareup.moshi:moshi-kotlin:1.14.0'
 
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
-    implementation "com.squareup.retrofit2:converter-moshi:2.5.0"
-    implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
@@ -61,7 +61,7 @@ dependencies {
 
     implementation "androidx.recyclerview:recyclerview:1.2.1"
 
-    implementation 'com.squareup.picasso:picasso:2.8'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     implementation("androidx.room:room-ktx:2.5.0-alpha03")
     implementation "androidx.room:room-runtime:2.5.0-alpha03"
@@ -78,7 +78,7 @@ dependencies {
     implementation("androidx.work:work-runtime:$work_version")
     implementation("androidx.work:work-runtime-ktx:$work_version")
     //picasso
-    implementation ("com.squareup.picasso:picasso:2.8")
+    implementation ('com.squareup.picasso:picasso:2.71828')
 
     implementation "androidx.preference:preference-ktx:1.2.0"
 }
