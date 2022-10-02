@@ -31,7 +31,7 @@ import java.time.LocalDate
 class Repository(var context: Context) {
       val dao = RoomDB.getInstance(context)!!.getDAO()
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     fun getDataOfAsteroidsFromApi() {
         val url = Constants.BASE_URL +"feed?start_date=${LocalDate.now()}&end_date=${LocalDate.now().plusDays(7)}&api_key=ziBqPUoN9OTlf9DM8rgzpMKPXhnSkvih3fLwFT46"
         var request = Request.Builder().url(url).build()
@@ -42,6 +42,7 @@ class Repository(var context: Context) {
                     Toast.makeText(context,e.message,Toast.LENGTH_LONG).show()}
             }
 
+            @RequiresApi(Build.VERSION_CODES.O)
             override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
                 val jsonString = response.body()!!.string()
                saveDataInLocalDataBase(parseAsteroidsJsonResult(JSONObject(jsonString)))
@@ -49,6 +50,7 @@ class Repository(var context: Context) {
             }
         })
     }
+
 
     private fun upDateDate(){
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
