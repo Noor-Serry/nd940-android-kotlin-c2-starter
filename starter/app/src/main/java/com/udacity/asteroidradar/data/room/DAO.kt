@@ -21,6 +21,8 @@ interface DAO {
     fun insertNewImageOfTheDay(pictureOfDay: PictureOfDay)
     @Query("select * from PictureOfDay")
     fun getImageOfTheDay():LiveData<List<PictureOfDay>>
+    @Query ("Delete from Asteroid where closeApproachDate < :today")
+    fun deleteOldData(today : String)
 
 
 }

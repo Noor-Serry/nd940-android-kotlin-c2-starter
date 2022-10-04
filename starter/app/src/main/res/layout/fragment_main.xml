@@ -35,7 +35,7 @@
                 android:src="@drawable/asteroid_hazardous"
                 app:image="@{viewModel.imageOfTheDay}"
                 app:lifecycle="@{lifecycleOwner}"
-                android:contentDescription="@{viewModel.imageOfTheDay.get(0).explanation}"
+                android:contentDescription="@{viewModel.imageOfTheDay!=null?viewModel.imageOfTheDay.get(0).explanation:@string/image_of_the_day}"
                 />
 
             <TextView

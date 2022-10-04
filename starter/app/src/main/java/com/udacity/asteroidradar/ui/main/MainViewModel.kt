@@ -8,12 +8,13 @@ import java.time.LocalDate
 
 class MainViewModel(application : Application) : AndroidViewModel(application) {
     private val repository = Repository(application)
-    var toDayAsteroids = repository.dao.getToDayAsteroids(LocalDate.now().toString())
+    var toDayAsteroids = repository.getToDayAsteroids()
     var sevenDayAsteroid = repository.dao.getSevenDayAsteroids(LocalDate.now().toString())
     var allAsteroids = repository.dao.getAllAsteroids()
     var imageOfTheDay = repository.dao.getImageOfTheDay()
-init {
 
-}
+    fun deleteOldData(){
+        repository.deleteOldData()
+    }
 
 }

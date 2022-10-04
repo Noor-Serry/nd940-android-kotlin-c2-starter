@@ -10,4 +10,7 @@
     <item
         android:id="@+id/show_buy_menu"
         android:title="@string/saved_asteroids" />
+    <item
+        android:id="@+id/DeleteData"
+        android:title="@string/Delete_old_data" />
 </menu>

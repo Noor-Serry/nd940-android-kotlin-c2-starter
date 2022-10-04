@@ -53,6 +53,8 @@ class MainFragment : Fragment() {
                 viewModel.toDayAsteroids.observe(viewLifecycleOwner,this::sendDataToBinding)
             R.id.show_buy_menu ->
                 viewModel.allAsteroids.observe(viewLifecycleOwner,this::sendDataToBinding)
+            R.id.DeleteData ->
+                viewModel.deleteOldData()
             else ->
                 viewModel.sevenDayAsteroid.observe(viewLifecycleOwner,this::sendDataToBinding)
         }

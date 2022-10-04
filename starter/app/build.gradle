@@ -8,6 +8,9 @@ apply plugin: 'androidx.navigation.safeargs'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+
+    def localProperties = new Properties()
+    localProperties.load(new FileInputStream(rootProject.file("local.properties")))
     compileSdkVersion 33
     defaultConfig {
         applicationId "com.udacity.asteroidradar"
@@ -16,13 +19,20 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField ("String", "API_KEY", localProperties.getProperty("API_KEY"))
     }
     buildTypes {
+
+
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
         }
-    }
+
+
+            }
     buildFeatures {
         dataBinding true
     }

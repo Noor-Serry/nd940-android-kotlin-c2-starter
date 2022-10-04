@@ -1,6 +1,7 @@
 package com.udacity.asteroidradar
 
 
+
 import android.graphics.BitmapFactory
 import android.util.Base64
 import android.widget.ImageView
@@ -14,8 +15,10 @@ import com.udacity.asteroidradar.data.room.PictureOfDay
 fun bindAsteroidStatusImage(imageView: ImageView, isHazardous: Boolean) {
     if (isHazardous) {
         imageView.setImageResource(R.drawable.ic_status_potentially_hazardous)
+        imageView.contentDescription = "this asteroid is Hazardous"
     } else {
         imageView.setImageResource(R.drawable.ic_status_normal)
+        imageView.contentDescription = "this asteroid is Not Hazardous"
     }
 }
 
@@ -54,6 +57,13 @@ fun bindStringToImageView(imageView: ImageView, image: LiveData<List<PictureOfDa
         val imageByte = Base64.decode(image[0].image, Base64.DEFAULT)
         imageView.setImageBitmap(BitmapFactory.decodeByteArray(imageByte, 0, imageByte.size))
     }}
-
 }
+
+@BindingAdapter("customContentDescription")
+fun customContentDescriptionForImageStatus(imageView: ImageView , isHazardous: Boolean){
+    if(isHazardous){
+        imageView.contentDescription = "this asteroid is Hazardous" }
+    else{ imageView.contentDescription = "this asteroid is Not Hazardous"}
+}
+
 

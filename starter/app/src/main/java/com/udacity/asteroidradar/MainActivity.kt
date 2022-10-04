@@ -1,16 +1,11 @@
 package com.udacity.asteroidradar
 
 
-
 import android.os.Bundle
-import androidx.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.work.Constraints
-import androidx.work.NetworkType
-import androidx.work.OneTimeWorkRequest
-import androidx.work.WorkManager
+import androidx.work.*
 import com.udacity.asteroidradar.utils.workManager.MyWork
-import java.time.LocalDate
+import java.util.concurrent.TimeUnit
 
 
 class MainActivity : AppCompatActivity() {
@@ -19,22 +14,17 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        upDateData()
+        startWorkManger()
 
     }
 
-    private fun upDateData(){
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        if(!sharedPreferences.getString("lastDate","2022-10-1").equals("${LocalDate.now()}"))
-            startWorkManger()
-    }
-
-    private fun startWorkManger(){
+    private fun startWorkManger() {
         var constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED).setRequiresCharging(true).build()
-        val request = OneTimeWorkRequest.Builder(MyWork::class.java)
+        val request = PeriodicWorkRequestBuilder<MyWork>(1, TimeUnit.DAYS)
             .setConstraints(constraints).build()
-        WorkManager.getInstance(this).enqueue(request)
+        WorkManager.getInstance(this)
+            .enqueueUniquePeriodicWork("updateDate", ExistingPeriodicWorkPolicy.KEEP, request)
     }
 
 }
